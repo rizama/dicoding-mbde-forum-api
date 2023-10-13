@@ -3,10 +3,11 @@ const GetComment = require('../../Domains/comments/entities/GetComment');
 const GetReplies = require('../../Domains/replies/entities/GetReplies');
 
 class ThreadUseCase {
-    constructor({ threadRepository, commentRepository, replyRepository }) {
+    constructor({ threadRepository, commentRepository, replyRepository, likeRepository }) {
         this._threadRepository = threadRepository;
         this._commentRepository = commentRepository;
         this._replyRepository = replyRepository;
+        this._likeRepository = likeRepository;
     }
 
     async addThread(useCasePayload) {
@@ -39,6 +40,8 @@ class ThreadUseCase {
             };
         });
 
+        const likes = await this._likeRepository.getLikeByThreadId(threadId);
+
         // merging
         const commentsWithReplies = commentsThread
             .filter((comment) => comment.thread_id === threadId)
@@ -55,9 +58,11 @@ class ThreadUseCase {
                 const buildGetComment = new GetComment({ comments: [comment] })
                     .comments[0];
 
+                const likesCount = likes.filter(like => like.comment_id === comment.id).length;
                 return {
                     ...buildGetComment,
                     replies,
+                    likeCount: likesCount,
                 };
             });
 

@@ -5,6 +5,7 @@ const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
 const GetThread = require('../../../Domains/threads/entities/GetThread');
 const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
+const LikeRepository = require('../../../Domains/likes/LikeRepository');
 
 describe('ThreadUseCase', () => {
     describe('addThread function', () => {
@@ -99,11 +100,20 @@ describe('ThreadUseCase', () => {
                 },
             ];
 
+            const expectedLikes = [
+                {
+                    id: 'reply-1998',
+                    thread_id: 'thread-98765',
+                    comment_id: 'comment-67890',
+                },
+            ];
+
             // Test Double
             const threadId = 'thread-98765';
             const mockThreadRepository = new ThreadRepository();
             const mockCommentRepository = new CommentRepository();
             const mockReplyRepository = new ReplyRepository();
+            const mockLikeRepository = new LikeRepository();
 
             mockThreadRepository.checkAvailabilityThread = jest.fn(() =>
                 Promise.resolve()
@@ -120,10 +130,15 @@ describe('ThreadUseCase', () => {
                 Promise.resolve(expectedReplies)
             );
 
+            mockLikeRepository.getLikeByThreadId = jest.fn(() =>
+                Promise.resolve(expectedLikes)
+            );
+
             const threadUseCase = new ThreadUseCase({
                 threadRepository: mockThreadRepository,
                 commentRepository: mockCommentRepository,
                 replyRepository: mockReplyRepository,
+                likeRepository: mockLikeRepository,
             });
 
             // Action
@@ -142,6 +157,9 @@ describe('ThreadUseCase', () => {
             expect(mockReplyRepository.getReplies).toHaveBeenCalledWith(
                 threadId
             );
+            expect(mockLikeRepository.getLikeByThreadId).toHaveBeenCalledWith(
+                threadId
+            );
 
             expect(detailThread).toStrictEqual({
                 thread: {
@@ -157,6 +175,7 @@ describe('ThreadUseCase', () => {
                             date: '2023-09-22T13:20:00.000Z',
                             content: 'some content comment',
                             replies: [],
+                            likeCount: 0,
                         },
                         {
                             id: 'comment-67890',
@@ -171,6 +190,7 @@ describe('ThreadUseCase', () => {
                                     content: 'reply reply',
                                 },
                             ],
+                            likeCount: 1,
                         },
                     ],
                 },
