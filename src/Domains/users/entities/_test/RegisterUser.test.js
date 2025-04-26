@@ -9,7 +9,7 @@ describe('a RegisterUser entities', () => {
         };
 
         // Action and Assert
-        expect(() => new RegisterUser(payload)).toThrowError(
+        expect(() => new RegisterUser(payload)).toThrow(
             'REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -23,7 +23,7 @@ describe('a RegisterUser entities', () => {
         };
 
         // Action & Assert
-        expect(() => new RegisterUser(payload)).toThrowError(
+        expect(() => new RegisterUser(payload)).toThrow(
             'REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });
@@ -37,7 +37,7 @@ describe('a RegisterUser entities', () => {
             password: 'sam',
         };
         // Action and Assert
-        expect(() => new RegisterUser(payload)).toThrowError(
+        expect(() => new RegisterUser(payload)).toThrow(
             'REGISTER_USER.USERNAME_LIMIT_CHAR'
         );
     });
@@ -50,7 +50,7 @@ describe('a RegisterUser entities', () => {
             password: 'sam',
         };
         // Action and Assert
-        expect(() => new RegisterUser(payload)).toThrowError(
+        expect(() => new RegisterUser(payload)).toThrow(
             'REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER'
         );
     });

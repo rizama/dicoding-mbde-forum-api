@@ -6,19 +6,19 @@ describe('AuthenticationTokenManager interface', () => {
         const tokenmanager = new AuthenticationTokenManager();
 
         // Action & Assert
-        await expect(tokenmanager.createAccessToken('')).rejects.toThrowError(
+        await expect(tokenmanager.createAccessToken('')).rejects.toThrow(
             'AUTHENTICATION_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED'
         );
 
-        await expect(tokenmanager.createRefreshToken('')).rejects.toThrowError(
+        await expect(tokenmanager.createRefreshToken('')).rejects.toThrow(
             'AUTHENTICATION_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED'
         );
 
-        await expect(tokenmanager.verifyRefreshToken('')).rejects.toThrowError(
+        await expect(tokenmanager.verifyRefreshToken('')).rejects.toThrow(
             'AUTHENTICATION_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED'
         );
 
-        await expect(tokenmanager.decodePayload('')).rejects.toThrowError(
+        await expect(tokenmanager.decodePayload('')).rejects.toThrow(
             'AUTHENTICATION_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED'
         );
     });

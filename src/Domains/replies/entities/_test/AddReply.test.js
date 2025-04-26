@@ -8,7 +8,7 @@ describe('a AddReply entities', () => {
             comment: 'comment-sam',
         };
 
-        expect(() => new AddReply(payload)).toThrowError(
+        expect(() => new AddReply(payload)).toThrow(
             'ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -21,7 +21,7 @@ describe('a AddReply entities', () => {
             content: 123,
         };
 
-        expect(() => new AddReply(payload)).toThrowError(
+        expect(() => new AddReply(payload)).toThrow(
             'ADD_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

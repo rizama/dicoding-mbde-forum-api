@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const AuthenticationError = require('../AuthenticationError');
 
 describe('AuthenticationError', () => {

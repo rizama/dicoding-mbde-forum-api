@@ -54,12 +54,12 @@ describe('ReplyUseCase class', () => {
             });
             const addedReply = await replyUseCase.addReply(useCasePayload);
 
-            expect(mockThreadRepository.checkAvailabilityThread).toBeCalledWith(
+            expect(mockThreadRepository.checkAvailabilityThread).toHaveBeenCalledWith(
                 useCasePayload.thread_id
             );
             expect(
                 mockCommentRepository.checkAvailabilityComment
-            ).toBeCalledWith(useCasePayload.comment_id);
+            ).toHaveBeenCalledWith(useCasePayload.comment_id);
             expect(addedReply).toStrictEqual(
                 new AddedReply({
                     id: 'reply-sam',
@@ -67,7 +67,7 @@ describe('ReplyUseCase class', () => {
                     user_id: useCasePayload.user_id,
                 })
             );
-            expect(mockReplyRepository.addReply).toBeCalledWith(
+            expect(mockReplyRepository.addReply).toHaveBeenCalledWith(
                 new AddReply({
                     thread_id: useCasePayload.thread_id,
                     comment_id: useCasePayload.comment_id,
@@ -90,7 +90,7 @@ describe('ReplyUseCase class', () => {
 
             await expect(
                 replyUseCase.deleteReply(useCasePayload)
-            ).rejects.toThrowError(
+            ).rejects.toThrow(
                 'DELETE_REPLY_USE_CASE.NOT_CONTAIN_VALID_PAYLOAD'
             );
         });
@@ -105,7 +105,7 @@ describe('ReplyUseCase class', () => {
             const replyUseCase = new ReplyUseCase({});
             await expect(
                 replyUseCase.deleteReply(useCasePayload)
-            ).rejects.toThrowError(
+            ).rejects.toThrow(
                 'DELETE_REPLY_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION'
             );
         });

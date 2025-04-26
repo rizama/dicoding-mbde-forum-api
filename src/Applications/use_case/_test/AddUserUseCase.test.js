@@ -52,11 +52,11 @@ describe('AddUserUseCase', () => {
                 fullname: useCasePayload.fullname,
             })
         );
-        expect(mockUserRepository.verifyAvailableUsername).toBeCalledWith(
+        expect(mockUserRepository.verifyAvailableUsername).toHaveBeenCalledWith(
             useCasePayload.username
         );
-        expect(mockPasswordHash.hash).toBeCalledWith(useCasePayload.password);
-        expect(mockUserRepository.addUser).toBeCalledWith(
+        expect(mockPasswordHash.hash).toHaveBeenCalledWith(useCasePayload.password);
+        expect(mockUserRepository.addUser).toHaveBeenCalledWith(
             new RegisterUser({
                 username: useCasePayload.username,
                 password: 'encrypted_password',

@@ -78,7 +78,7 @@ describe('ThreadRepositoryPostgres', () => {
             ).rejects.toThrow(NotFoundError);
             await expect(
                 threadRepositoryPostgres.checkAvailabilityThread(threadId)
-            ).rejects.toThrowError('thread tidak ditemukan!');
+            ).rejects.toThrow('thread tidak ditemukan!');
         });
 
         it('should not throw NotFoundError if thread available', async () => {

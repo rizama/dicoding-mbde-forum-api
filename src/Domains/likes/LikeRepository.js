@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 class LikeRepository {
     async addLike(addLike) {
         throw new Error('LIKE_REPOSITORY.METHOD_NOT_IMPLEMENTED');

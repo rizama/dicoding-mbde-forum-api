@@ -38,18 +38,18 @@ describe('LikeUseCase', () => {
         });
         await getLikeUseCase.execute(useCasePayload);
 
-        expect(mockThreadRepository.checkAvailabilityThread).toBeCalledWith(
+        expect(mockThreadRepository.checkAvailabilityThread).toHaveBeenCalledWith(
             useCasePayload.thread_id
         );
-        expect(mockCommentRepository.checkAvailabilityComment).toBeCalledWith(
+        expect(mockCommentRepository.checkAvailabilityComment).toHaveBeenCalledWith(
             useCasePayload.comment_id
         );
-        expect(mockLikeRepository.verifyAvailableLike).toBeCalledWith(
+        expect(mockLikeRepository.verifyAvailableLike).toHaveBeenCalledWith(
             'thread-sam',
             'comment-sam',
             'user-sam'
         );
-        expect(mockLikeRepository.addLike).toBeCalledWith(
+        expect(mockLikeRepository.addLike).toHaveBeenCalledWith(
             expectedRegisteredLike
         );
     });
@@ -82,17 +82,17 @@ describe('LikeUseCase', () => {
         });
         await getLikeUseCase.execute(useCasePayload);
 
-        expect(mockThreadRepository.checkAvailabilityThread).toBeCalledWith(
+        expect(mockThreadRepository.checkAvailabilityThread).toHaveBeenCalledWith(
             useCasePayload.thread_id
         );
-        expect(mockCommentRepository.checkAvailabilityComment).toBeCalledWith(
+        expect(mockCommentRepository.checkAvailabilityComment).toHaveBeenCalledWith(
             useCasePayload.comment_id
         );
-        expect(mockLikeRepository.verifyAvailableLike).toBeCalledWith(
+        expect(mockLikeRepository.verifyAvailableLike).toHaveBeenCalledWith(
             'thread-sam',
             'comment-sam',
             'user-sam'
         );
-        expect(mockLikeRepository.deleteLike).toBeCalledWith('like-sam');
+        expect(mockLikeRepository.deleteLike).toHaveBeenCalledWith('like-sam');
     });
 });

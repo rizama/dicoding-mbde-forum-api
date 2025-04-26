@@ -7,7 +7,7 @@ describe('AddedThread entity', () => {
             user_id: 'user-123',
         };
 
-        expect(() => new AddedThread(payload)).toThrowError(
+        expect(() => new AddedThread(payload)).toThrow(
             'ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -21,7 +21,7 @@ describe('AddedThread entity', () => {
         };
 
         // Action and Assert
-        expect(() => new AddedThread(payload)).toThrowError(
+        expect(() => new AddedThread(payload)).toThrow(
             'ADDED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

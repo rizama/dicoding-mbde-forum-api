@@ -7,7 +7,7 @@ describe('a AddedComment entities', () => {
             user_id: 'user-sam',
         };
 
-        expect(() => new AddedComment(payload)).toThrowError(
+        expect(() => new AddedComment(payload)).toThrow(
             'ADDED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -19,7 +19,7 @@ describe('a AddedComment entities', () => {
             user_id: 'user-sam',
         };
 
-        expect(() => new AddedComment(payload)).toThrowError(
+        expect(() => new AddedComment(payload)).toThrow(
             'ADDED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

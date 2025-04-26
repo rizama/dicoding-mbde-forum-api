@@ -8,17 +8,17 @@ describe('AuthenticationRepository interface', () => {
         // Action & Assert
         await expect(
             authenticationRepository.addToken('')
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'AUTHENTICATION_REPOSITORY.METHOD_NOT_IMPLEMENTED'
         );
         await expect(
             authenticationRepository.checkAvailableToken('')
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'AUTHENTICATION_REPOSITORY.METHOD_NOT_IMPLEMENTED'
         );
         await expect(
             authenticationRepository.deleteToken('')
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'AUTHENTICATION_REPOSITORY.METHOD_NOT_IMPLEMENTED'
         );
     });

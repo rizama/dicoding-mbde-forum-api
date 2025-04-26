@@ -9,7 +9,7 @@ describe('AddThread entity', () => {
         };
 
         // Action and Assert
-        expect(() => new AddThread(payload)).toThrowError(
+        expect(() => new AddThread(payload)).toThrow(
             'ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -23,7 +23,7 @@ describe('AddThread entity', () => {
         };
 
         // Action & Assert
-        expect(() => new AddThread(payload)).toThrowError(
+        expect(() => new AddThread(payload)).toThrow(
             'ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });
@@ -36,7 +36,7 @@ describe('AddThread entity', () => {
             user_id: 'user-sksds',
         };
         // Action and Assert
-        expect(() => new AddThread(payload)).toThrowError(
+        expect(() => new AddThread(payload)).toThrow(
             'ADD_THREAD.TITLE_LIMIT_CHAR'
         );
     });

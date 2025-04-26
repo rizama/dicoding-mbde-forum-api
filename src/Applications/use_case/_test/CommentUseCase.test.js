@@ -47,10 +47,10 @@ describe('CommentUseCase class', () => {
                 useCasePayload
             );
 
-            expect(mockThreadRepository.checkAvailabilityThread).toBeCalledWith(
+            expect(mockThreadRepository.checkAvailabilityThread).toHaveBeenCalledWith(
                 useCasePayload.thread_id
             );
-            expect(mockCommentRepository.addComment).toBeCalledWith(
+            expect(mockCommentRepository.addComment).toHaveBeenCalledWith(
                 new AddComment({
                     thread_id: useCasePayload.thread_id,
                     content: useCasePayload.content,
@@ -79,7 +79,7 @@ describe('CommentUseCase class', () => {
 
             await expect(
                 commentUseCase.deleteComment(useCasePayload)
-            ).rejects.toThrowError(
+            ).rejects.toThrow(
                 'DELETE_COMMENT_USE_CASE.NOT_CONTAIN_VALID_PAYLOAD'
             );
         });
@@ -93,7 +93,7 @@ describe('CommentUseCase class', () => {
             const commentUseCase = new CommentUseCase({});
             await expect(
                 commentUseCase.deleteComment(useCasePayload)
-            ).rejects.toThrowError(
+            ).rejects.toThrow(
                 'DELETE_COMMENT_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION'
             );
         });

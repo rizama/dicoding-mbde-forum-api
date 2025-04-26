@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* istanbul ignore file */
 require('dotenv').config();
 const { Pool } = require('pg');

@@ -7,7 +7,7 @@ describe('a AddedReply entities', () => {
             user_id: 'user-sam',
         };
 
-        expect(() => new AddedReply(payload)).toThrowError(
+        expect(() => new AddedReply(payload)).toThrow(
             'ADDED_REPLY.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -19,7 +19,7 @@ describe('a AddedReply entities', () => {
             user_id: 'user-sam',
         };
 
-        expect(() => new AddedReply(payload)).toThrowError(
+        expect(() => new AddedReply(payload)).toThrow(
             'ADDED_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

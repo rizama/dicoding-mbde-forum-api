@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 class UserLogin {
     constructor(payload) {
         this._verifyPayload(payload);

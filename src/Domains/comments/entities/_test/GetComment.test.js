@@ -15,7 +15,7 @@ describe('a GetComment entities', () => {
             ],
         };
 
-        expect(() => new GetComment(payload)).toThrowError(
+        expect(() => new GetComment(payload)).toThrow(
             'GET_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -51,13 +51,13 @@ describe('a GetComment entities', () => {
             ],
         };
 
-        expect(() => new GetComment(payload)).toThrowError(
+        expect(() => new GetComment(payload)).toThrow(
             'GET_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
-        expect(() => new GetComment(payload2)).toThrowError(
+        expect(() => new GetComment(payload2)).toThrow(
             'GET_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
-        expect(() => new GetComment(payload3)).toThrowError(
+        expect(() => new GetComment(payload3)).toThrow(
             'GET_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

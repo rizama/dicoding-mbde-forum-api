@@ -6,7 +6,7 @@ describe('a AddLike entities', () => {
             thread_id: 'thread-sam',
             comment_id: 'comment-sam',
         };
-        expect(() => new AddLike(payload)).toThrowError(
+        expect(() => new AddLike(payload)).toThrow(
             'REGISTER_LIKE.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -17,7 +17,7 @@ describe('a AddLike entities', () => {
             comment_id: [],
             user_id: 'user-sam',
         };
-        expect(() => new AddLike(payload)).toThrowError(
+        expect(() => new AddLike(payload)).toThrow(
             'REGISTER_LIKE.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

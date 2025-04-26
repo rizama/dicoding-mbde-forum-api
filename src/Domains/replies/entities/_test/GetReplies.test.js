@@ -15,7 +15,7 @@ describe('a GetReplies entities', () => {
             ],
         };
 
-        expect(() => new GetReplies(payload)).toThrowError(
+        expect(() => new GetReplies(payload)).toThrow(
             'GET_REPLIES.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -51,13 +51,13 @@ describe('a GetReplies entities', () => {
             ],
         };
 
-        expect(() => new GetReplies(payload)).toThrowError(
+        expect(() => new GetReplies(payload)).toThrow(
             'GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
-        expect(() => new GetReplies(payload2)).toThrowError(
+        expect(() => new GetReplies(payload2)).toThrow(
             'GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
-        expect(() => new GetReplies(payload3)).toThrowError(
+        expect(() => new GetReplies(payload3)).toThrow(
             'GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

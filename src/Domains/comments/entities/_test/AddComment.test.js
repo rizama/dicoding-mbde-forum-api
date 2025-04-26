@@ -7,7 +7,7 @@ describe('a AddComment entities', () => {
             thread: 'thread-sam',
         };
 
-        expect(() => new AddComment(payload)).toThrowError(
+        expect(() => new AddComment(payload)).toThrow(
             'ADD_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -19,7 +19,7 @@ describe('a AddComment entities', () => {
             content: true,
         };
 
-        expect(() => new AddComment(payload)).toThrowError(
+        expect(() => new AddComment(payload)).toThrow(
             'ADD_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

@@ -96,7 +96,7 @@ describe('LikeRepositoryPostgres', () => {
 
             await expect(
                 likeRepositoryPostgres.deleteLike('like-sam')
-            ).rejects.toThrowError(InvariantError);
+            ).rejects.toThrow(InvariantError);
         });
 
         it('should not throw Error when query run correctly', async () => {
@@ -108,7 +108,7 @@ describe('LikeRepositoryPostgres', () => {
 
             await expect(
                 likeRepositoryPostgres.deleteLike('like-sam')
-            ).resolves.not.toThrowError(InvariantError);
+            ).resolves.not.toThrow(InvariantError);
         });
     });
 

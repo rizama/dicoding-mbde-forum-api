@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 class AuthenticationTokenManager {
     async createAccessToken(payload) {
         throw new Error('AUTHENTICATION_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED');

@@ -10,6 +10,11 @@
     },
     "rules": {
         "no-undef": "off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "off",
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "camelcase": "off"
     }
 }

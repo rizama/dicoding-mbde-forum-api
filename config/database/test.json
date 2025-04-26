@@ -1,7 +1,7 @@
 {
   "user": "sam",
-  "password": "sam",
+  "password": "sam123",
   "host": "localhost",
   "port": 5432,
-  "database": "authapi_test"
+  "database": "forum_test"
 }

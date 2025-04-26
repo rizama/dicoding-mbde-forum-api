@@ -1,4 +1,4 @@
-const NewAuth = require("../NewAuth");
+const NewAuth = require('../NewAuth');
 
 describe('NewAuth entities', () => {
     it('should throw error when payload not contain needed property', () => {
@@ -8,7 +8,7 @@ describe('NewAuth entities', () => {
         };
 
         // Action & Assert
-        expect(() => new NewAuth(payload)).toThrowError(
+        expect(() => new NewAuth(payload)).toThrow(
             'NEW_AUTH.NOT_CONTAIN_NEEDED_PROPERTY'
         );
     });
@@ -21,7 +21,7 @@ describe('NewAuth entities', () => {
         };
 
         // Action & Assert
-        expect(() => new NewAuth(payload)).toThrowError(
+        expect(() => new NewAuth(payload)).toThrow(
             'NEW_AUTH.NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

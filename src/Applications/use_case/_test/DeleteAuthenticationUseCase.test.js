@@ -1,4 +1,4 @@
-const DeleteAuthenticationUseCase = require("../DeleteAuthenticationUseCase");
+const DeleteAuthenticationUseCase = require('../DeleteAuthenticationUseCase');
 const AuthenticationRepository = require('../../../Domains/authentications/AuthenticationRepository');
 
 describe('DeleteAuthenticationUseCase', () => {
@@ -10,7 +10,7 @@ describe('DeleteAuthenticationUseCase', () => {
         // Action & Assert
         await expect(
             deleteAuthenticationUseCase.execute(useCasePayload)
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'DELETE_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN'
         );
     });
@@ -25,7 +25,7 @@ describe('DeleteAuthenticationUseCase', () => {
         // Action & Assert
         await expect(
             deleteAuthenticationUseCase.execute(useCasePayload)
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });

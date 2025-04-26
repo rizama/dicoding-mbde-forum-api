@@ -13,7 +13,7 @@ describe('RefreshAuthenticationUseCase', () => {
         // Action & Assert
         await expect(
             refreshAuthenticationUseCase.execute(useCasePayload)
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'REFRESH_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN'
         );
     });
@@ -30,7 +30,7 @@ describe('RefreshAuthenticationUseCase', () => {
         // Action & Assert
         await expect(
             refreshAuthenticationUseCase.execute(useCasePayload)
-        ).rejects.toThrowError(
+        ).rejects.toThrow(
             'REFRESH_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION'
         );
     });
@@ -69,14 +69,14 @@ describe('RefreshAuthenticationUseCase', () => {
         // Assert
         expect(
             mockAuthenticationTokenManager.verifyRefreshToken
-        ).toBeCalledWith(useCasePayload.refreshToken);
-        expect(mockAuthenticationRepository.checkAvailableToken).toBeCalledWith(
+        ).toHaveBeenCalledWith(useCasePayload.refreshToken);
+        expect(mockAuthenticationRepository.checkAvailableToken).toHaveBeenCalledWith(
             useCasePayload.refreshToken
         );
-        expect(mockAuthenticationTokenManager.decodePayload).toBeCalledWith(
+        expect(mockAuthenticationTokenManager.decodePayload).toHaveBeenCalledWith(
             useCasePayload.refreshToken
         );
-        expect(mockAuthenticationTokenManager.createAccessToken).toBeCalledWith(
+        expect(mockAuthenticationTokenManager.createAccessToken).toHaveBeenCalledWith(
             { username: 'dicoding', id: 'user-123' }
         );
         expect(accessToken).toEqual('some_new_access_token');
