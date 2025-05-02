@@ -10,38 +10,31 @@ class GetReplies {
             throw new Error('GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION');
         }
 
-        for (const reply of replies) {
-            const id = 'id' in reply;
-            const username = 'username' in reply;
-            const date = 'date' in reply;
-            const content = 'content' in reply;
-            const is_delete = 'is_delete' in reply;
+        const requiredProperties = ['id', 'username', 'date', 'content', 'is_delete', 'comment_id'];
+        const stringProperties = ['id', 'username', 'content', 'comment_id'];
 
-            if (!id || !username || !date || !content || !is_delete) {
+        for (const reply of replies) {
+            // Check required properties
+            const missingProperties = requiredProperties.filter(prop => !(prop in reply));
+            if (missingProperties.length > 0) {
                 throw new Error('GET_REPLIES.NOT_CONTAIN_NEEDED_PROPERTY');
             }
-        }
 
-        for (const reply of replies) {
-            for (const key in reply) {
-                if (
-                    ['id', 'username', 'date', 'is_delete', 'content'].includes(
-                        key
-                    )
-                ) {
-
-                    if (key === 'is_delete') {
-                        if (typeof reply[key] !== 'boolean') {
-                            throw new Error(
-                                'GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION'
-                            );
-                        }
-                    } else if (typeof reply[key] !== 'string') {
-                        throw new Error(
-                            'GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION'
-                        );
-                    }
+            // Check data types
+            for (const prop of stringProperties) {
+                if (typeof reply[prop] !== 'string') {
+                    throw new Error('GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION');
                 }
+            }
+
+            // Check date type
+            if (!(typeof reply.date === 'string' || reply.date instanceof Date)) {
+                throw new Error('GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION');
+            }
+
+            // Check is_delete type
+            if (typeof reply.is_delete !== 'boolean') {
+                throw new Error('GET_REPLIES.NOT_MEET_DATA_TYPE_SPECIFICATION');
             }
         }
     }
@@ -54,6 +47,7 @@ class GetReplies {
             content: reply.is_delete
                 ? '**balasan telah dihapus**'
                 : reply.content,
+            comment_id: reply.comment_id
         }));
     }
 }

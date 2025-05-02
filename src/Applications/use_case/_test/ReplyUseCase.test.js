@@ -3,7 +3,7 @@ const ReplyUseCase = require('../ReplyUseCase');
 const AddReply = require('../../../Domains/replies/entities/AddReply');
 const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
-// const CommentRepository = require('../../../Domains/comments/CommentRepository');
+const CommentRepository = require('../../../Domains/comments/CommentRepository');
 
 describe('ReplyUseCase class', () => {
     it('should be defined', async () => {
@@ -32,9 +32,7 @@ describe('ReplyUseCase class', () => {
             });
 
             const mockThreadRepository = new ThreadRepository();
-            const mockCommentRepository = {
-                checkAvailabilityComment() {},
-            };
+            const mockCommentRepository = new CommentRepository();
             const mockReplyRepository = new ReplyRepository();
 
             mockThreadRepository.checkAvailabilityThread = jest.fn(() =>
@@ -119,9 +117,7 @@ describe('ReplyUseCase class', () => {
             };
 
             const mockReplyRepository = new ReplyRepository();
-            const mockCommentRepository = {
-                checkAvailabilityComment() {},
-            };
+            const mockCommentRepository = new CommentRepository();
             const mockThreadRepository = new ThreadRepository();
 
             mockThreadRepository.checkAvailabilityThread = jest.fn(() =>

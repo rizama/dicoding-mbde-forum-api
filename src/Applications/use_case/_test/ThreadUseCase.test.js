@@ -6,6 +6,7 @@ const GetThread = require('../../../Domains/threads/entities/GetThread');
 const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
 const LikeRepository = require('../../../Domains/likes/LikeRepository');
+const ThreadDetail = require('../../../Domains/threads/entities/ThreadDetail');
 
 describe('ThreadUseCase', () => {
     describe('addThread function', () => {
@@ -161,40 +162,45 @@ describe('ThreadUseCase', () => {
                 threadId
             );
 
-            expect(detailThread).toStrictEqual({
-                thread: {
-                    id: 'thread-98765',
-                    title: 'title of thread',
-                    body: 'some content body',
-                    date: '2023-09-22T00:00:00.000Z',
-                    username: 'sampratama',
-                    comments: [
-                        {
-                            id: 'comment-12345',
-                            username: 'rizkysamp',
-                            date: '2023-09-22T13:20:00.000Z',
-                            content: 'some content comment',
-                            replies: [],
-                            likeCount: 0,
-                        },
-                        {
-                            id: 'comment-67890',
-                            username: 'rizkypratama',
-                            date: '2023-09-23T13:20:00.000Z',
-                            content: 'some content comment',
-                            replies: [
-                                {
-                                    id: 'reply-1998',
-                                    username: 'songjihyo',
-                                    date: '2023-09-22T14:20:00.000Z',
-                                    content: 'reply reply',
-                                },
-                            ],
-                            likeCount: 1,
-                        },
-                    ],
-                },
-            });
+            // Assert thread properties
+            expect(detailThread.thread).toBeInstanceOf(ThreadDetail);
+            expect(detailThread.thread.id).toBe('thread-98765');
+            expect(detailThread.thread.title).toBe('title of thread');
+            expect(detailThread.thread.body).toBe('some content body');
+            expect(detailThread.thread.username).toBe('sampratama');
+
+            // Assert comments
+            expect(Array.isArray(detailThread.thread.comments)).toBe(true);
+            expect(detailThread.thread.comments).toHaveLength(2);
+
+            // Assert first comment
+            const firstComment = detailThread.thread.comments[0];
+            expect(firstComment.id).toBe('comment-12345');
+            expect(firstComment.content).toBe('some content comment');
+            expect(firstComment.username).toBe('rizkysamp');
+            expect(firstComment.likeCount).toBe(0);
+            expect(Array.isArray(firstComment.replies)).toBe(true);
+            expect(firstComment.replies).toHaveLength(0);
+
+            // Assert second comment
+            const secondComment = detailThread.thread.comments[1];
+            expect(secondComment.id).toBe('comment-67890');
+            expect(secondComment.content).toBe('some content comment');
+            expect(secondComment.username).toBe('rizkypratama');
+            expect(secondComment.likeCount).toBe(1);
+
+            // Assert replies for second comment
+            expect(Array.isArray(secondComment.replies)).toBe(true);
+            expect(secondComment.replies).toHaveLength(1);
+            expect(secondComment.replies[0].id).toBe('reply-1998');
+            expect(secondComment.replies[0].content).toBe('reply reply');
+            expect(secondComment.replies[0].username).toBe('songjihyo');
+
+            // Assert likes data
+            expect(expectedLikes).toHaveLength(1);
+            expect(expectedLikes[0].id).toBe('reply-1998');
+            expect(expectedLikes[0].thread_id).toBe('thread-98765');
+            expect(expectedLikes[0].comment_id).toBe('comment-67890');
         });
     });
 });

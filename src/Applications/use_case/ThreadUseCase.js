@@ -1,6 +1,5 @@
 const AddThread = require('../../Domains/threads/entities/AddThread');
-const GetComment = require('../../Domains/comments/entities/GetComment');
-const GetReplies = require('../../Domains/replies/entities/GetReplies');
+const ThreadDetail = require('../../Domains/threads/entities/ThreadDetail');
 
 class ThreadUseCase {
     constructor({ threadRepository, commentRepository, replyRepository, likeRepository }) {
@@ -16,61 +15,23 @@ class ThreadUseCase {
     }
 
     async getThread(useCasePayload) {
-        // code
         const threadId = useCasePayload;
         await this._threadRepository.checkAvailabilityThread(threadId);
 
         const thread = await this._threadRepository.getThread(threadId);
-
-        const comments = await this._commentRepository.getComments(
-            threadId
-        );
-        const commentsThread = comments.map((comment) => {
-            return {
-                ...comment,
-                date: new Date(comment.date).toISOString(),
-            };
-        });
-
+        const comments = await this._commentRepository.getComments(threadId);
         const replies = await this._replyRepository.getReplies(threadId);
-        const repliesThread = replies.map((reply) => {
-            return {
-                ...reply,
-                date: new Date(reply.date).toISOString(),
-            };
-        });
-
         const likes = await this._likeRepository.getLikeByThreadId(threadId);
 
-        // merging
-        const commentsWithReplies = commentsThread
-            .filter((comment) => comment.thread_id === threadId)
-            .map((comment) => {
-                const replies = repliesThread
-                    .filter((reply) => reply.comment_id === comment.id)
-                    .map((reply) => {
-                        const buildGetReplies = new GetReplies({
-                            replies: [reply],
-                        }).replies[0];
-                        return buildGetReplies;
-                    });
-
-                const buildGetComment = new GetComment({ comments: [comment] })
-                    .comments[0];
-
-                const likesCount = likes.filter(like => like.comment_id === comment.id).length;
-                return {
-                    ...buildGetComment,
-                    replies,
-                    likeCount: likesCount,
-                };
-            });
+        const threadDetail = new ThreadDetail({
+            thread,
+            comments,
+            replies,
+            likes,
+        });
 
         return {
-            thread: {
-                ...thread,
-                comments: commentsWithReplies,
-            },
+            thread: threadDetail,
         };
     }
 }

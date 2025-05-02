@@ -62,6 +62,53 @@ describe('a GetComment entities', () => {
         );
     });
 
+    it('should throw error when date is not string or Date instance', () => {
+        const payload = {
+            comments: [
+                {
+                    id: 'comment-sam',
+                    username: 'samsam',
+                    date: 12345, // invalid date type
+                    content: 'some comment',
+                    is_delete: false,
+                },
+            ],
+        };
+
+        expect(() => new GetComment(payload)).toThrow(
+            'GET_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
+        );
+    });
+
+    it('should accept both string and Date instance for date field', () => {
+        const payload1 = {
+            comments: [
+                {
+                    id: 'comment-sam',
+                    username: 'samsam',
+                    date: '2023-09-24 16:52:01.000Z', // string date
+                    content: 'some comment',
+                    is_delete: false,
+                },
+            ],
+        };
+
+        const payload2 = {
+            comments: [
+                {
+                    id: 'comment-sam',
+                    username: 'samsam',
+                    date: new Date(), // Date instance
+                    content: 'some comment',
+                    is_delete: false,
+                },
+            ],
+        };
+
+        expect(() => new GetComment(payload1)).not.toThrow();
+        expect(() => new GetComment(payload2)).not.toThrow();
+    });
+
     it('should remap comments data correctly', () => {
         const payload = {
             comments: [

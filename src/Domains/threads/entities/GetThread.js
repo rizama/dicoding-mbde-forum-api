@@ -19,7 +19,7 @@ class GetThread {
             typeof id !== 'string' ||
             typeof title !== 'string' ||
             typeof body !== 'string' ||
-            typeof date !== 'string' ||
+            !(typeof date === 'string' || date instanceof Date) ||
             typeof username !== 'string'
         ) {
             throw new Error('GET_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
