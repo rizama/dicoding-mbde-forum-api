@@ -1,5 +1,6 @@
 require('dotenv').config();
 const Hapi = require('@hapi/hapi');
+const os = require('os');
 const ClientError = require('../../Commons/exceptions/ClientError');
 const DomainErrorTranslator = require('../../Commons/exceptions/DomainErrorTranslator');
 const users = require('../../Interfaces/http/api/users');
@@ -9,6 +10,7 @@ const threads = require('../../Interfaces/http/api/threads');
 const replies = require('../../Interfaces/http/api/replies');
 const comments = require('../../Interfaces/http/api/comments');
 const likes = require('../../Interfaces/http/api/likes');
+const logger = require('../../../logger');
 
 const createServer = async (container) => {
     const server = Hapi.server({
@@ -104,6 +106,14 @@ const createServer = async (container) => {
             newResponse.code(500);
             return newResponse;
         }
+
+        logger.info(
+            `userIP=${request.info.remoteAddress}, host=${
+                os.hostname
+            },  method=${request.method}, path=${
+                request.path
+            }, payload=${JSON.stringify(response.source)}`
+        );
 
         // jika bukan error, lanjutkan dengan response sebelumnya (tanpa terintervensi)
         return h.continue;
