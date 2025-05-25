@@ -4,4 +4,5 @@ coverage
 auth-api-app-server.pem
 package-lock.json
 config/database/test.json
-logger/
+logger/*.log
+logger/*.json
