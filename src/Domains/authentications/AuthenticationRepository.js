@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // Interface AuthenticationRepository
 class AuthenticationRepository {
     async addToken(token) {
